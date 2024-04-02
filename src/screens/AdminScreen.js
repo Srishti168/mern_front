@@ -43,13 +43,17 @@ function AdminScreen() {
           </div>
         </div>
       </div>
-      <style>
-        {`
+      <style jsx>{`
         .admin-tabs-container .ant-tabs-content {
           overflow-x: auto;
         }
-        `}
-      </style>
+
+        @media screen and (max-width: 992px) {
+          .admin-tabs-container .ant-tabs-content {
+            overflow-x: hidden;
+          }
+        }
+      `}</style>
     </div>
   );
 }
