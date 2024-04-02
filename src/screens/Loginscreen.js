@@ -19,10 +19,10 @@ function LoginScreen() {
       email,
       password,
     };
-    alert(user);
+    
     try {
       const result = (await axios.post("https://mern-project-6.onrender.com/api/users/login", user)).data;
-      alert(result);
+    
       const name=(JSON.stringify(result.isAdmin));
       localStorage.setItem("currentUser", JSON.stringify(result));
       if(name)

@@ -23,7 +23,7 @@ function RegisterScreen() {
         password,
         cpassword,
       };
-      alert(user);
+    
       setLoading(true);
       setError("");
       setSuccess("");
