@@ -7,24 +7,24 @@ import AdminAddRoomScreen from "./AdminAddRoomScreen";
 
 const { TabPane } = Tabs;
 
+function callback(key) {
+  console.log(key);
+}
+
 function AdminScreen() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
-    if (!user || user.isAdmin == false) {
+    if (!user || user.isAdmin === false) {
       window.location.href = "/home";
     }
   }, []);
-
-  function callback(key) {
-    console.log(key);
-  }
 
   return (
     <div className="container mt-3">
       <h1 className="text-center mb-4">Admin Panel</h1>
       <div className="row justify-content-center">
-        <div className="col-lg-8 col-md-10">
+        <div className="col-lg-10">
           <Tabs defaultActiveKey="1" onChange={callback}>
             <TabPane tab="Bookings" key="1">
               <AdminBookingScreen />
@@ -41,11 +41,6 @@ function AdminScreen() {
           </Tabs>
         </div>
       </div>
-      <style jsx>{`
-        .ant-tabs-tabpane {
-          overflow-x: auto;
-        }
-      `}</style>
     </div>
   );
 }
