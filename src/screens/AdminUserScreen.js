@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Tag, Space } from "antd";
+import { Table, Tag } from "antd";
 
 import Loader from "../components/Loader";
 import Error from "../components/Error";
@@ -18,7 +18,6 @@ function AdminUserScreen() {
       key: "name",
     },
     { title: "email", dataIndex: "email", key: "email" },
-
     {
       title: "isAdmin",
       dataIndex: "isAdmin",
@@ -39,27 +38,30 @@ function AdminUserScreen() {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("https://mern-project-6.onrender.com/api/users/getallusers")).data;
-      setUsers(data);
+      const data = await axios.post("https://mern-project-6.onrender.com/api/users/getallusers");
+      setUsers(data.data);
     } catch (error) {
       console.log(error);
       setError(error);
     }
     setLoading(false);
   }
+
   useEffect(() => {
     fetchMyData();
   }, []);
 
   return (
-    <div className="row">
+    <div className="container mt-3">
       {loading ? (
-        <Loader></Loader>
+        <Loader />
       ) : error.length > 0 ? (
-        <Error msg={error}></Error>
+        <Error msg={error} />
       ) : (
-        <div className="col-md-12">
-          <Table columns={columns} dataSource={users} />
+        <div className="row">
+          <div className="col-md-12">
+            <Table columns={columns} dataSource={users} />
+          </div>
         </div>
       )}
     </div>
