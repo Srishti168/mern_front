@@ -25,33 +25,25 @@ function AdminScreen() {
       <h1 className="text-center mb-4">Admin Panel</h1>
       <div className="row justify-content-center">
         <div className="col-lg-8 col-md-10">
-          <div className="admin-tabs-container">
-            <Tabs defaultActiveKey="1" onChange={callback}>
-              <TabPane tab="Bookings" key="1">
-                <AdminBookingScreen />
-              </TabPane>
-              <TabPane tab="Rooms" key="2">
-                <AdminRoomScreen />
-              </TabPane>
-              <TabPane tab="Add Room" key="3">
-                <AdminAddRoomScreen />
-              </TabPane>
-              <TabPane tab="Users" key="4">
-                <AdminUserScreen />
-              </TabPane>
-            </Tabs>
-          </div>
+          <Tabs defaultActiveKey="1" onChange={callback}>
+            <TabPane tab="Bookings" key="1">
+              <AdminBookingScreen />
+            </TabPane>
+            <TabPane tab="Rooms" key="2">
+              <AdminRoomScreen />
+            </TabPane>
+            <TabPane tab="Add Room" key="3">
+              <AdminAddRoomScreen />
+            </TabPane>
+            <TabPane tab="Users" key="4">
+              <AdminUserScreen />
+            </TabPane>
+          </Tabs>
         </div>
       </div>
       <style jsx>{`
-        .admin-tabs-container .ant-tabs-content {
+        .ant-tabs-tabpane {
           overflow-x: auto;
-        }
-
-        @media screen and (max-width: 992px) {
-          .admin-tabs-container .ant-tabs-content {
-            overflow-x: hidden;
-          }
         }
       `}</style>
     </div>
