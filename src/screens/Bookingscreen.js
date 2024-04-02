@@ -64,9 +64,6 @@ function Bookingscreen({ match }) {
     try {
       setLoading(true);
 
-      // const result = await axios.post("/api/bookings/bookroom", bookingDetails,token);
-      // console.log(result);
-
       const result = await axios.post("https://mern-project-6.onrender.com/api/bookings/bookroom", bookingDetails);
 
       setLoading(false);
@@ -82,17 +79,6 @@ function Bookingscreen({ match }) {
       Swal.fire("Opps", "Error:" + error, "error");
     }
     setLoading(false);
-    //TESTING CARD
-    //https://stripe.com/docs/testing
-    //https://www.npmjs.com/package/react-stripe-checkout
-    // fetch("/save-stripe-token", {
-    //   method: "POST",
-    //   body: JSON.stringify(token),
-    // }).then((response) => {
-    //   response.json().then((data) => {
-    //     alert(`We are in business, ${data.email}`);
-    //   });
-    // });
   };
 
   return (
@@ -105,7 +91,11 @@ function Bookingscreen({ match }) {
         <div className="row justify-content-center mt-5 bs">
           <div className="col-md-6">
             <h1>{room.name}</h1>
-            <img src={room.imageurls[0]} alt="" className="bigimg" />
+            {room.imageurls && room.imageurls.length > 0 ? (
+              <img src={room.imageurls[0]} alt={room.name} className="img-fluid mb-3" />
+            ) : (
+              <p>No image available</p>
+            )}
           </div>
           <div className="col-md-6">
             <div style={{ textAlign: "right" }}>
