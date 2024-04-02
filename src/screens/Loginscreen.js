@@ -21,7 +21,7 @@ function LoginScreen() {
     };
     //console.log(user);
     try {
-      const result = (await axios.post("/api/users/login", user)).data;
+      const result = (await axios.post("https://mern-project-6.onrender.com/api/users/login", user)).data;
       console.log(result);
       const name=(JSON.stringify(result.isAdmin));
       localStorage.setItem("currentUser", JSON.stringify(result));

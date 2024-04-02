@@ -28,7 +28,7 @@ function RegisterScreen() {
       setError("");
       setSuccess("");
       try {
-        const result = (await axios.post("/api/users/register", user)).data;
+        const result = (await axios.post("https://mern-project-6.onrender.com/api/users/register", user)).data;
         console.log(result);
         setSuccess(result);
         setName("");

@@ -18,7 +18,7 @@ function MyBookingScreen() {
     setLoading(true);
     try {
       const data = (
-        await axios.post("/api/bookings/getbookingbyuserid", {
+        await axios.post("https://mern-project-6.onrender.com/api/bookings/getbookingbyuserid", {
           userid: user._id,
         })
       ).data;
@@ -39,7 +39,7 @@ function MyBookingScreen() {
     setLoading(true);
     try {
       const data = (
-        await axios.post("/api/bookings/cancelbooking", {
+        await axios.post("https://mern-project-6.onrender.com/api/bookings/cancelbooking", {
           bookingid,
           roomid,
         })

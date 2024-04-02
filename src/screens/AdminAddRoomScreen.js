@@ -34,7 +34,7 @@ function AdminAddRoomScreen() {
     setError("");
     setLoading(true);
     try {
-      const data = (await axios.post("/api/rooms/addroom", values)).data;
+      const data = (await axios.post("https://mern-project-6.onrender.com/api/rooms/addroom", values)).data;
       Swal.fire("Congratulations", "Your Room Added Successfully", "success");
       form.resetFields();
     } catch (error) {
