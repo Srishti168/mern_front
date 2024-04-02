@@ -1,67 +1,53 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { Table, Tag } from "antd";
-import Loader from "../components/Loader";
-import Error from "../components/Error";
+import { Tabs } from "antd";
+import AdminBookingScreen from "./AdminBookingScreen";
+import AdminRoomScreen from "./AdminRoomScreen";
+import AdminUserScreen from "./AdminUserScreen";
+import AdminAddRoomScreen from "./AdminAddRoomScreen";
 
-function AdminUserScreen() {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+const { TabPane } = Tabs;
 
-  const columns = [
-    { title: "userid", dataIndex: "_id", key: "_id", width: 150 },
-    { title: "Name", dataIndex: "name", key: "name", width: 200 },
-    { title: "Email", dataIndex: "email", key: "email", width: 250 },
-    {
-      title: "isAdmin",
-      dataIndex: "isAdmin",
-      key: "isAdmin",
-      render: (isAdmin) => (
-        <>
-          {isAdmin === true ? (
-            <Tag color="green">YES</Tag>
-          ) : (
-            <Tag color="red">NO</Tag>
-          )}
-        </>
-      ),
-      width: 100,
-    },
-  ];
-
-  async function fetchUsers() {
-    setError("");
-    setLoading(true);
-    try {
-      const data = (await axios.post("https://mern-project-6.onrender.com/api/users/getallusers")).data;
-      setUsers(data);
-    } catch (error) {
-      console.log(error);
-      setError(error);
-    }
-    setLoading(false);
-  }
+function AdminScreen() {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
 
   useEffect(() => {
-    fetchUsers();
+    if (!user || user.isAdmin == false) {
+      window.location.href = "/home";
+    }
   }, []);
 
+  function callback(key) {
+    console.log(key);
+  }
+
   return (
-    <div className="row">
-      {loading ? (
-        <Loader />
-      ) : error ? (
-        <Error msg={error} />
-      ) : (
-        <div className="col-md-12">
-          <div className="table-responsive">
-            <Table columns={columns} dataSource={users} scroll={{ x: true }} />
-          </div>
+    <div className="container mt-3">
+      <h1 className="text-center mb-4">Admin Panel</h1>
+      <div className="row justify-content-center">
+        <div className="col-lg-8 col-md-10">
+          <Tabs defaultActiveKey="1" onChange={callback}>
+            <TabPane tab="Bookings" key="1">
+              <AdminBookingScreen />
+            </TabPane>
+            <TabPane tab="Rooms" key="2">
+              <AdminRoomScreen />
+            </TabPane>
+            <TabPane tab="Add Room" key="3">
+              <AdminAddRoomScreen />
+            </TabPane>
+            <TabPane tab="Users" key="4">
+              <AdminUserScreen />
+            </TabPane>
+          </Tabs>
         </div>
-      )}
+      </div>
+      <style jsx>{`
+        .ant-tabs-tabpane {
+          overflow-x: auto;
+        }
+      `}</style>
     </div>
   );
 }
 
-export default AdminUserScreen;
+export default AdminScreen;
