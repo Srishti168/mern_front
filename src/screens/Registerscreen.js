@@ -74,7 +74,7 @@ function RegisterScreen() {
               }}
             />
             <input
-              type="text"
+              type="password"
               className="form-control"
               placeholder="password"
               value={password}
@@ -83,7 +83,7 @@ function RegisterScreen() {
               }}
             />
             <input
-              type="text"
+              type="password"
               className="form-control"
               placeholder="confirm password"
               value={cpassword}
